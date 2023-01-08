@@ -15,13 +15,7 @@ public class DispatchList {
 
 	int damn_timer = 0;
 
-	public DispatchList() {
-		dispatchList = new LinkedList<Item>();
-	}
-
-	public void AddList(Item item) {
-		dispatchList.add(item);
-	}
+	
 
 	public void General_Dispatcher() {
 		int size = dispatchList.size();
@@ -29,10 +23,6 @@ public class DispatchList {
 		int used_items_count = 0;
 
 		while (used_items_count != size || !fpl.FPL_isEmpty() || !spl.SPL_isEmpty() || !rr.RR_isEmpty()) { // tüm
-																											// itemler
-																											// kullanıldığında
-																											// ve tüm
-																											// listeler
 																											// boşaldığında
 																											// duracak
 			for (int i = 0; i < size; i++) {
@@ -59,6 +49,11 @@ public class DispatchList {
 		}
 	}
 
+
+	public void AddList(Item item) {
+		dispatchList.add(item);
+	}
+	
 	void Executer() {
 		if (!(rtq.FCFS_isEmpty())) { 
 			int rtq_ExecTime = rtq.FCFS_execute(damn_timer);
@@ -74,6 +69,9 @@ public class DispatchList {
 			damn_timer += rr_ExecTime;
 		} else
 			damn_timer++;
+	}
+	public DispatchList() {
+		dispatchList = new LinkedList<Item>();
 	}
 
 	public void TimeOut_Scanner(int gecenZaman) { 
