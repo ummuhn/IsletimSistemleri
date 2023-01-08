@@ -9,11 +9,7 @@ public class FCFSList {
 	void FCFS_add(ProcessItem item) {
 		kuyruk.addQueue(item);
 
-	}
-
-	boolean FCFS_isEmpty() {
-		return kuyruk.isEmptyQueue();
-	}
+	}	
 
 	int FCFS_execute(int zaman) {
 
@@ -59,5 +55,9 @@ public class FCFSList {
 		}
 
 		return timer;
+	}
+
+	boolean FCFS_isEmpty() {
+		return kuyruk.isEmptyQueue();
 	}
 }
