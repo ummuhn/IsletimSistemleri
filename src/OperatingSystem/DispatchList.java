@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class DispatchList {
-	LinkedList<Item> dispatchList;
+	LinkedList<ProcessItem> dispatchList;
 
 	UserQueue uq = new UserQueue();
 
@@ -29,13 +29,13 @@ public class DispatchList {
 				if (dispatchList.size() == 0)
 					break;
 
-				if (dispatchList.get(0).varis > damn_timer) {
+				if (dispatchList.get(0).arrival > damn_timer) {
 					break;
-				} else if (dispatchList.get(0).oncelik == 0) {
+				} else if (dispatchList.get(0).priority == 0) {
 					rtq.FCFS_add(dispatchList.remove());
 					used_items_count++;
 				} else {
-					if (dispatchList.get(0).oncelik != 0) {
+					if (dispatchList.get(0).priority != 0) {
 						uq.UJ_add(dispatchList.remove());
 						used_items_count++;
 					}
@@ -50,7 +50,7 @@ public class DispatchList {
 	}
 
 
-	public void AddList(Item item) {
+	public void AddList(ProcessItem item) {
 		dispatchList.add(item);
 	}
 	
@@ -71,7 +71,7 @@ public class DispatchList {
 			damn_timer++;
 	}
 	public DispatchList() {
-		dispatchList = new LinkedList<Item>();
+		dispatchList = new LinkedList<ProcessItem>();
 	}
 
 	public void TimeOut_Scanner(int gecenZaman) { 
@@ -79,9 +79,9 @@ public class DispatchList {
 		String text = "";
 
 		for (int i = 0; i < rtq.queue.queueSize(); i++) {
-			Item item = rtq.queue.Get(i);
+			ProcessItem item = rtq.queue.Get(i);
 
-			if (gecenZaman - item.askiyaAlinma >= 20)
+			if (gecenZaman - item.suspend >= 20)
 			{
 				Random rng = new Random();
 
@@ -91,7 +91,7 @@ public class DispatchList {
 
 				text = String.format(
 						"\033[38;2;%d;%d;%dm%d sn proses zamanasimi      (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-						r, g, b, gecenZaman, item.id, item.oncelik, item.burstTime);
+						r, g, b, gecenZaman, item.id, item.priority, item.burstTime);
 
 				System.out.println(text);
 
@@ -101,8 +101,8 @@ public class DispatchList {
 		}
 		
 		for (int i = 0; i < fpl.queue.queueSize(); i++) {
-			Item item = fpl.queue.Get(i);
-			if (gecenZaman - item.askiyaAlinma >= 20)
+			ProcessItem item = fpl.queue.Get(i);
+			if (gecenZaman - item.suspend >= 20)
 			{
 				Random rng = new Random();
 				
@@ -112,7 +112,7 @@ public class DispatchList {
 
 				text = String.format(
 						"\033[38;2;%d;%d;%dm%d sn proses zamanasimi      (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-						r, g, b, gecenZaman, item.id, item.oncelik, item.burstTime);
+						r, g, b, gecenZaman, item.id, item.priority, item.burstTime);
 
 				System.out.println(text);
 
@@ -122,8 +122,8 @@ public class DispatchList {
 		}
 		
 		for (int i = 0; i < spl.queue.queueSize(); i++) {
-			Item item = spl.queue.Get(i);
-			if (gecenZaman - item.askiyaAlinma >= 20)
+			ProcessItem item = spl.queue.Get(i);
+			if (gecenZaman - item.suspend >= 20)
 			{
 				Random rng = new Random();
 
@@ -133,7 +133,7 @@ public class DispatchList {
 
 				text = String.format(
 						"\033[38;2;%d;%d;%dm%d sn proses zamanasimi      (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-						r, g, b, gecenZaman, item.id, item.oncelik, item.burstTime);
+						r, g, b, gecenZaman, item.id, item.priority, item.burstTime);
 
 				System.out.println(text);
 
@@ -142,8 +142,8 @@ public class DispatchList {
 			}
 		}
 		for (int i = 0; i < rr.queue.queueSize(); i++) {
-			Item item = rr.queue.Get(i);
-			if (gecenZaman - item.askiyaAlinma >= 20)
+			ProcessItem item = rr.queue.Get(i);
+			if (gecenZaman - item.suspend >= 20)
 			{
 				Random rng = new Random();
 
@@ -153,7 +153,7 @@ public class DispatchList {
 
 				text = String.format(
 						"\033[38;2;%d;%d;%dm%d sn proses zamanasimi      (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-						r, g, b, gecenZaman, item.id, item.oncelik, item.burstTime);
+						r, g, b, gecenZaman, item.id, item.priority, item.burstTime);
 
 				System.out.println(text);
 

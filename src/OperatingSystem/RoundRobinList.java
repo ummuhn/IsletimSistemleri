@@ -6,7 +6,7 @@ public class RoundRobinList {
 	Queue queue = new Queue();
 	int sayac = 0;
 
-	void RR_add(Item item) {
+	void RR_add(ProcessItem item) {
 		queue.addQueue(item);
 
 	}
@@ -15,7 +15,7 @@ public class RoundRobinList {
 		return queue.isEmptyQueue();
 	}
 
-	Item cikanEleman = null;
+	ProcessItem cikanEleman = null;
 
 	int RR_execute(int zaman) {
 
@@ -30,22 +30,22 @@ public class RoundRobinList {
 		String text = "";
 
 		int timer = 0; 
-		Item item = queue.Get(sayac);
+		ProcessItem item = queue.Get(sayac);
 
 		text = String.format(
 				"\033[38;2;%d;%d;%dm%2d sn proses basladi         (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m", r,
-				g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+				g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 		System.out.println(text);
 
 		timer++;
 		item.burstTime--;
 
-		item.askiyaAlinma = zaman + timer; 
+		item.suspend = zaman + timer; 
 		if (item.burstTime == 0) {
 			text = String.format(
 					"\033[38;2;%d;%d;%dm%2d sn proses sonlandi        (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-					r, g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+					r, g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 			System.out.println(text);
 
@@ -57,7 +57,7 @@ public class RoundRobinList {
 		} else { 
 			text = String.format(
 					"\033[38;2;%d;%d;%dm%2d sn proses askida          (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-					r, g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+					r, g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 			System.out.println(text);
 

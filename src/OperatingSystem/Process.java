@@ -9,7 +9,7 @@ public class Process {
 
 	public static DispatchList dl = null;
 
-	public Process(DispatchList dl) 
+	public Process(DispatchList dl)  //Kurucu sınıf
 	{
 		Process.dl = dl;
 	}
@@ -23,7 +23,7 @@ public class Process {
 
 			String line = allLines.get(i);
 
-			Item item = new Item();
+			ProcessItem item = new ProcessItem();
 
 			int sayac = -1;
 
@@ -47,10 +47,10 @@ public class Process {
 					sayac++;
 					switch (sayac) {
 					case 0:
-						item.varis = Integer.parseInt(data);
+						item.arrival = Integer.parseInt(data);
 						break;
 					case 1:
-						item.oncelik = Integer.parseInt(data);
+						item.priority = Integer.parseInt(data);
 						break;
 					}
 
@@ -62,7 +62,7 @@ public class Process {
 			
 			idSayac++;
 			
-			item.askiyaAlinma = item.varis; 
+			item.suspend = item.arrival; 
 			
 			
 			dl.AddList(item);
