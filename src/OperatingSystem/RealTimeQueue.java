@@ -6,7 +6,7 @@ public class RealTimeQueue {
 
 	Queue queue = new Queue();
 
-	void FCFS_add(Item item) {
+	void FCFS_add(ProcessItem item) {
 		queue.addQueue(item);
 
 	}
@@ -29,12 +29,12 @@ public class RealTimeQueue {
 
 		String text = "";
 
-		Item item =queue.exitQueue();
+		ProcessItem item =queue.exitQueue();
 
 		
 		text = String.format(
 				"\033[38;2;%d;%d;%dm%2d sn proses basladi         (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m", r,
-				g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+				g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 		System.out.println(text);
 
@@ -42,19 +42,19 @@ public class RealTimeQueue {
 			item.burstTime--;
 			timer++;
 
-			item.askiyaAlinma = zaman + timer;
+			item.suspend = zaman + timer;
 
 			if (item.burstTime > 0) {
 
 				text = String.format(
 						"\033[38;2;%d;%d;%dm%2d sn proses yurutuluyor     (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-						r, g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+						r, g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 				System.out.println(text);
 			} else {
 				text = String.format(
 						"\033[38;2;%d;%d;%dm%2d sn proses sonlandi        (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-						r, g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+						r, g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 				System.out.println(text);
 			}

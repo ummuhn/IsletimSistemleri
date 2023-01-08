@@ -7,9 +7,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		DispatchList dl = new DispatchList();
-
-		Process p1 = new Process(dl);
-
-		p1.process();
+		Process process = new Process(dl);
+		process.process();
 	}
 }

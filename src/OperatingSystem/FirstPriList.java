@@ -7,7 +7,7 @@ public class FirstPriList {
 	SecondPriList spl = new SecondPriList();
 	Queue queue = new Queue();
 
-	void FPL_add(Item item) {
+	void FPL_add(ProcessItem item) {
 		queue.addQueue(item);
 
 	}
@@ -30,25 +30,25 @@ public class FirstPriList {
 
 		int timer = 0; 
 
-		Item item = queue.exitQueue();
+		ProcessItem item = queue.exitQueue();
 
 		text = String.format(
 				"\033[38;2;%d;%d;%dm%2d sn proses basladi         (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m", r,
-				g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+				g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 		System.out.println(text);
 
 		timer++;
 		item.burstTime--;
 
-		item.askiyaAlinma = zaman + timer;
+		item.suspend = zaman + timer;
 		if (item.burstTime > 0) {
 
-			item.oncelik++;
+			item.priority++;
 
 			text = String.format(
 					"\033[38;2;%d;%d;%dm%2d sn proses askida          (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-					r, g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+					r, g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 			System.out.println(text);
 
@@ -57,7 +57,7 @@ public class FirstPriList {
 		} else {
 			text = String.format(
 					"\033[38;2;%d;%d;%dm%2d sn proses sonlandi        (id: %2d   oncelik:%2d  kalan sure:%2d sn)\033[0m",
-					r, g, b, (zaman + timer), item.id, item.oncelik, item.burstTime);
+					r, g, b, (zaman + timer), item.id, item.priority, item.burstTime);
 
 			System.out.println(text);
 		}

@@ -4,22 +4,22 @@ import java.util.LinkedList;
 
 public class Queue {
 
-	private LinkedList<Item> queue = new LinkedList<Item>();
+	private LinkedList<ProcessItem> queue = new LinkedList<ProcessItem>();
 
-	public void addQueue(Item item) {
+	public void addQueue(ProcessItem item) {
 		queue.addLast(item);
 		
 	}
 
-	public Item exitQueue() {
+	public ProcessItem exitQueue() {
 		return queue.remove();
 	}
 	
-	public Item exitQueue(int id) {
+	public ProcessItem exitQueue(int id) {
 		return queue.remove(id);
 	}
 
-	public Item Get(int index)
+	public ProcessItem Get(int index)
 	{
 		return queue.get(index);
 	}
